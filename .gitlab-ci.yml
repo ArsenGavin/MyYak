@@ -1,0 +1,100 @@
+#include:
+#  - template: Security/Dependency-Scanning.gitlab-ci.yml
+#  - template: Security/License-Scanning.gitlab-ci.yml
+#  - template: Security/SAST.gitlab-ci.yml
+#  - template: Security/Secret-Detection.gitlab-ci.yml
+
+image: node:latest
+
+before_script:
+  - apt-get update -qy
+  - apt-get install -y ruby-dev
+  - gem install dpl
+
+stages:
+  - unit_test
+  - front_test
+  - intgration_test
+  - security
+  - Deploy
+  - Build
+
+unit_tests:
+  stage: unit_test
+  script:
+    - cd Back-end/
+    - yarn install
+    - yarn test
+
+frontend_tests:
+  stage: front_test
+  script:
+    - cd Front-end/
+    - yarn install
+    - yarn test
+
+intgration_tests:
+  stage: intgration_test
+  needs: [unit_tests]
+  script:
+    - cd Back-end/
+    - yarn install
+    - yarn run test:coverage
+
+#.dependency_scanning:
+#  stage: security-scan
+#  needs: [unit_test]
+#  only:
+#    - main
+#
+#.license_scanning:
+#  stage: security-scan
+#  needs: [unit_test]
+#  only:
+#    - main
+#
+#.sast:
+#  stage: security-scan
+#  needs: [unit_test]
+#  variables:
+#    VALIDATE_SCHEMA: "true"
+#  only:
+#    - main
+#
+#.secret-analyzer:
+#  stage: security-scan
+#  needs: [unit_test]
+#  only:
+#    - main
+
+deploy:
+  stage: Deploy
+  image: ruby:latest
+  needs: [unit_tests, frontend_tests, intgration_tests]
+  script:
+    - cd Back-end/
+    - dpl --provider=heroku --app=$HEROKU_APP --api-key=$HEROKU_API_KEY
+  only:
+    refs:
+      - main
+    changes:
+      - Back-end/**/*
+
+build:
+  stage: Build
+  image: reactnativecommunity/react-native-android
+  needs: [deploy]
+  script:
+    - cd Front-end/
+    - yarn install
+    - cd android
+    - chmod 777 *
+    - ./gradlew assembleRelease
+  artifacts:
+    paths:
+      - Front-end/android/app/
+  only:
+    refs:
+      - main
+    changes:
+      - Front-end/**/*

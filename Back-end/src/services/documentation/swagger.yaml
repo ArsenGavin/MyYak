@@ -1,0 +1,671 @@
+swagger: "2.0"
+info:
+  description: "MyYak Swagger documentation for endpoints and models"
+  version: "1.0.1"
+  title: "MyYak Swagger Documentation"
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: "contact@epitech.eu"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "github.com"
+basePath: "/swagger"
+tags:
+  - name: "User"
+    description: "Operations about User"
+  - name: "Zone"
+    description: "Operations about Zone"
+  - name: "Discussion"
+    description: "Operations about Discussion"
+  - name: "Message"
+    description: "Operations about Message"
+schemes:
+  - "https"
+paths:
+  /login:
+    post:
+      tags:
+        - "User"
+      summary: "User login"
+      description: "This is a description"
+      operationId: ""
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: ""
+          schema:
+            $ref: "#/definitions/LoginBody"
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            $ref: "#/definitions/LoginResponse"
+        "401":
+          description: "Unauthorized - Invalid email or password"
+        "500":
+          description: "Internal server error"
+  /register:
+    post:
+      tags:
+        - "User"
+      summary: "Register user"
+      description: "This is a description"
+      operationId: ""
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        "201":
+          description: "Successful operation"
+          schema:
+            $ref: "#/definitions/UserResponse"
+        "500":
+          description: "Internal server error"
+  /user:
+    post:
+      tags:
+        - "User"
+      summary: "Create a user"
+      description: ""
+      operationId: ""
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: ""
+          schema:
+            $ref: "#/definitions/User"
+      responses:
+        "201":
+          description: "Successful operation"
+        "500":
+          description: "Internal server error"
+  /user/{id}:
+    get:
+      tags:
+        - "User"
+      summary: "Get a user"
+      description: ""
+      operationId: ""
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "User id"
+          required: true
+          type: "string"
+          format: "ObjectId"
+        - in: "body"
+          name: "body"
+          description: ""
+          schema:
+            $ref: "#/definitions/User"
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            $ref: "#/definitions/UserResponse"
+        "500":
+          description: "Internal server error"
+    put:
+      tags:
+        - "User"
+      summary: "Update a user"
+      description: ""
+      operationId: ""
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "User id"
+          required: true
+          type: "string"
+          format: "ObjectId"
+        - in: "body"
+          name: "body"
+          description: ""
+          schema:
+            $ref: "#/definitions/User"
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            $ref: "#/definitions/UserResponse"
+        "500":
+          description: "Internal server error"
+    delete:
+      tags:
+        - "User"
+      summary: "Delete a user"
+      description: ""
+      operationId: ""
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "User id"
+          required: true
+          type: "string"
+          format: "ObjectId"
+      responses:
+        "200":
+          description: "Successful operation"
+        "500":
+          description: "Internal server error"
+  /zone:
+    post:
+      tags:
+        - "Zone"
+      summary: "Create a discussion zone"
+      description: ""
+      operationId: ""
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        "201":
+          description: "Successful operation"
+        "500":
+          description: "Internal server error"
+    get:
+      tags:
+        - "Zone"
+      summary: "Get all discussion zones"
+      description: ""
+      operationId: ""
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "Successful operation"
+        "500":
+          description: "Internal server error"
+  /zone/{id}:
+    get:
+      tags:
+        - "Zone"
+      summary: "Get a discussion zone"
+      description: ""
+      operationId: ""
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "Successful operation"
+        "500":
+          description: "Internal server error"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "Zone id"
+          required: true
+          type: "string"
+          format: "ObjectId"
+    put:
+      tags:
+        - "Zone"
+      summary: "Update a discussion zone"
+      description: ""
+      operationId: ""
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "Successful operation"
+        "500":
+          description: "Internal server error"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "Zone id"
+          required: true
+          type: "string"
+          format: "ObjectId"
+    patch:
+      tags:
+        - "Zone"
+      summary: "Update a discussion zone"
+      description: ""
+      operationId: ""
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "Successful operation"
+        "500":
+          description: "Internal server error"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "Zone id"
+          required: true
+          type: "string"
+          format: "ObjectId"
+    delete:
+      tags:
+        - "Zone"
+      summary: "Delete a discussion zone"
+      description: ""
+      operationId: ""
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "Successful operation"
+        "500":
+          description: "Internal server error"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "Zone id"
+          required: true
+          type: "string"
+          format: "ObjectId"
+  /discussion:
+    post:
+      tags:
+        - "Discussion"
+      summary: "Create a discussion"
+      description: ""
+      operationId: ""
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        "201":
+          description: "Successful operation"
+        "500":
+          description: "Internal server error"
+    get:
+      tags:
+        - "Discussion"
+      summary: "Get all discussions"
+      description: ""
+      operationId: ""
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "Successful operation"
+        "500":
+          description: "Internal server error"
+  /discussion/{id}:
+    get:
+      tags:
+        - "Discussion"
+      summary: "Get a discussion"
+      description: ""
+      operationId: ""
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "Successful operation"
+        "500":
+          description: "Internal server error"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "Zone id"
+          required: true
+          type: "string"
+          format: "ObjectId"
+    put:
+      tags:
+        - "Discussion"
+      summary: "Update a discussion"
+      description: ""
+      operationId: ""
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "Successful operation"
+        "500":
+          description: "Internal server error"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "Zone id"
+          required: true
+          type: "string"
+          format: "ObjectId"
+    patch:
+      tags:
+        - "Discussion"
+      summary: "Update a discussion"
+      description: ""
+      operationId: ""
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "Successful operation"
+        "500":
+          description: "Internal server error"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "Zone id"
+          required: true
+          type: "string"
+          format: "ObjectId"
+    delete:
+      tags:
+        - "Discussion"
+      summary: "Delete a discussion"
+      description: ""
+      operationId: ""
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "Successful operation"
+        "500":
+          description: "Internal server error"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "Zone id"
+          required: true
+          type: "string"
+          format: "ObjectId"
+
+  /message:
+    post:
+      tags:
+        - "Message"
+      summary: "Create a message"
+      description: ""
+      operationId: ""
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        "201":
+          description: "Successful operation"
+        "500":
+          description: "Internal server error"
+    get:
+      tags:
+        - "Message"
+      summary: "Get all messages"
+      description: ""
+      operationId: ""
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "Successful operation"
+        "500":
+          description: "Internal server error"
+  /message/{id}:
+    get:
+      tags:
+        - "Message"
+      summary: "Get a message"
+      description: ""
+      operationId: ""
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "Successful operation"
+        "500":
+          description: "Internal server error"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "Zone id"
+          required: true
+          type: "string"
+          format: "ObjectId"
+    put:
+      tags:
+        - "Message"
+      summary: "Update a message"
+      description: ""
+      operationId: ""
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "Successful operation"
+        "500":
+          description: "Internal server error"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "Zone id"
+          required: true
+          type: "string"
+          format: "ObjectId"
+    patch:
+      tags:
+        - "Message"
+      summary: "Update a message"
+      description: ""
+      operationId: ""
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "Successful operation"
+        "500":
+          description: "Internal server error"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "Zone id"
+          required: true
+          type: "string"
+          format: "ObjectId"
+    delete:
+      tags:
+        - "Message"
+      summary: "Delete a message"
+      description: ""
+      operationId: ""
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "Successful operation"
+        "500":
+          description: "Internal server error"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "Zone id"
+          required: true
+          type: "string"
+          format: "ObjectId"
+
+definitions:
+  User:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+        format: "ObjectId"
+      email:
+        type: "string"
+      username:
+        type: "string"
+      password:
+        type: "string"
+      telephone:
+        type: "string"
+      createdAt:
+        type: "string"
+        format: "date-time"
+        default: "NOW()"
+      updatedAt:
+        type: "string"
+        format: "date-time"
+        default: "NOW()"
+
+  Zone:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+        format: "ObjectId"
+      name:
+        type: "string"
+      topX:
+        type: "number"
+      topY:
+        type: "number"
+      bottomX:
+        type: "number"
+      bottomY:
+        type: "number"
+      discussions:
+        type: "array"
+        items:
+          $ref: "#/definitions/Discussion"
+      createdAt:
+        type: "string"
+        format: "date-time"
+        default: "NOW()"
+      updatedAt:
+        type: "string"
+        format: "date-time"
+        default: "NOW()"
+
+  Discussion:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+        format: "ObjectId"
+      title:
+        type: "string"
+        format: "ObjectId"
+      vote:
+        type: "number"
+        default: 1
+      messages:
+        type: "array"
+        items:
+          $ref: "#/definitions/Message"
+      createdAt:
+        type: "string"
+        format: "date-time"
+        default: "NOW()"
+      updatedAt:
+        type: "string"
+        format: "date-time"
+        default: "NOW()"
+
+  Message:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+        format: "ObjectId"
+      authorId:
+        type: "string"
+        format: "ObjectId"
+      parentMessageId:
+        type: "string"
+        format: "ObjectId"
+      content:
+        type: "string"
+      vote:
+        type: "number"
+        default: 1
+      createdAt:
+        type: "string"
+        format: "date-time"
+        default: "NOW()"
+      updatedAt:
+        type: "string"
+        format: "date-time"
+        default: "NOW()"
+
+  UserResponse:
+    type: "object"
+    properties:
+      email:
+        type: "string"
+      username:
+        type: "string"
+
+  LoginBody:
+    type: "object"
+    properties:
+      email:
+        type: "string"
+      password:
+        type: "string"
+
+  LoginResponse:
+    type: "string"
+    format: "jwt"
+
+  ApiResponse:
+    type: "object"
+    properties:
+      code:
+        type: "integer"
+        format: "int32"
+      type:
+        type: "string"
+      message:
+        type: "string"
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "http://swagger.io"

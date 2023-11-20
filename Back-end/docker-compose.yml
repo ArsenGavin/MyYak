@@ -1,0 +1,33 @@
+version: "3.7"
+
+services:
+  mongo_db:
+    container_name: server_db
+    hostname: ${INSTANCE_DB}
+    image: mongo:latest
+    restart: always
+    networks:
+      - backend
+    env_file:
+      - .env
+    ports:
+      - "27017:27017"
+
+  server_web_back:
+    container_name: server_web_back
+    hostname: server_web_back
+    build: ./
+    networks:
+      - backend
+    volumes:
+      - .:/usr/src/app
+    depends_on:
+      - mongo_db
+    environment:
+      WAIT_HOSTS: ${INSTANCE_DB}:27017
+    ports:
+      - "4000:4000"
+
+networks:
+  backend:
+    driver: 'bridge'

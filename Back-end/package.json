@@ -1,0 +1,36 @@
+{
+  "name": "myyakapi",
+  "version": "1.0.0",
+  "description": "My Yak API",
+  "author": "",
+  "license": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "NODE_ENV=prod node server.js",
+    "watch:dev": "NODE_ENV=uat nodemon server.js",
+    "start:local": "SET NODE_ENV=development && nodemon server.js",
+    "start:linux": "NODE_ENV=development nodemon server.js",
+    "test": "NODE_ENV=uat mocha --exit 'tests/unit/*' --timemout=30000",
+    "test:coverage": "NODE_ENV=uat nyc mocha --exit 'tests/integration/*' --timeout=30000"
+  },
+  "dependencies": {
+    "axios": "^0.26.0",
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.19.0",
+    "custom-env": "^2.0.1",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "jwt-decode": "^3.1.2",
+    "lodash": "^4.17.21",
+    "mongoose": "^5.13.2",
+    "swagger-ui-express": "^4.1.6",
+    "validator": "^13.7.0"
+  },
+  "devDependencies": {
+    "chai": "^4.3.4",
+    "chai-http": "^4.3.0",
+    "mocha": "^8.4.0",
+    "nodemon": "^2.0.12",
+    "nyc": "^15.1.0"
+  }
+}

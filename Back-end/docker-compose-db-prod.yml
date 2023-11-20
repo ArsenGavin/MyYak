@@ -1,0 +1,11 @@
+version: "3.7"
+
+services:    
+    mongo_db:
+        container_name: server_db
+        image: mongo:bionic
+        restart: always
+        env_file:
+            - .env.prod
+        ports:
+            - "27017:27017"
